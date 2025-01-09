@@ -1,0 +1,35 @@
+/* Medium weight */
+@font-face {
+  font-family: "Inter Medium";
+  src: url("../fonts/Inter/static/Inter_18pt-Medium.ttf")
+      format("tff")
+}
+/* Regular weight */
+@font-face {
+    font-family: "Inter Regular";
+    src: url("../fonts/Inter/static/Inter_18pt-Regular.ttf")
+        format("ttf")
+  }
+
+
+/* Bold weight */
+@font-face {
+  font-family: "Inter Bold";
+  src: url("../fonts/Inter/static/Inter_18pt-Bold.ttf")
+      format("tff")
+}
+
+/* Light style */
+@font-face {
+  font-family: "Inter Light";
+  src: url("../fonts/Inter/static/Inter_18pt-Light.ttf")
+      format("tff")
+}
+
+/* Semi Bold */
+@font-face {
+  font-family: "Inter SemiBold";
+  src: url("../fonts/Inter/static/Inter_18pt-SemiBold.ttf")
+      format("woff")
+}
+
