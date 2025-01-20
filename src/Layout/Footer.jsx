@@ -1,34 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-// import Telegram from "../../Assets/images/telegram.svg";
-// import Instagram from "../../Assets/images/instagram.svg";
-// import Facebook from "../../Assets/images/facebook.svg";
-// import TikTok from "../../Assets/images/tiktok.svg";
-// import Logo from "../../Assets/images/logo.svg";
-
-import { Link } from "react-router-dom";
-
-
 import { SocialLink } from "./component/SocialLink";
 import { responsive } from "../utils/responsive";
 import { rem } from "../utils/responsiveHelpers";
-
-// Language Dropdown Options
-// const languageOptions = [
-//   { value: "en", label: "EN" },
-//   { value: "fr", label: "FR" },
-//   { value: "es", label: "ES" },
-//   { value: "de", label: "DE" },
-// ];
+import {
+  InstaIcon,
+  LinkedinIcon,
+  TikTokIcon,
+  XIcon,
+  YTIcon,
+} from "../assets/svg";
 
 const FooterContainer = styled.footer`
-  background: linear-gradient(180deg, rgba(251, 140, 36, 0) 30.82%, rgba(251, 140, 36, 0.17) 100%);
-  color: #461F0A;
+  background: linear-gradient(
+    180deg,
+    rgba(251, 140, 36, 0) 30.82%,
+    rgba(251, 140, 36, 0.17) 100%
+  );
+  color: #461f0a;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
-  padding: 7.5%;
+  width: 90%;
+  padding: 5%;
+  margin-top: 10%;
 
   ${responsive("xl", ``)}
   ${responsive(
@@ -41,51 +36,13 @@ const FooterContainer = styled.footer`
   ${responsive(
     "xs",
     `
-    flex-direction: column;
-    align-items: flex-start;
-    width: 80%;
-    padding: 10%;
-    `
-  )}
-`;
-
-const FooterSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${rem(20)};
-
-  ${responsive(
-    "xs",
-    `
-    align-items: flex-start;
+     display:flex;
+     padding-bottom:240px;
     `
   )}
 `;
 
 const FooterLogo = styled.div``;
-
-const BrandIcon = styled(Link)`
-  text-decoration: none;
-`;
-
-const FooterLinks = styled.ul`
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  ${responsive(
-    "xs",
-    `
-    flex-direction: column;
-    align-items: start;
-    padding-top: 5%;
-    `
-  )}
-`;
 
 const CopyRight = styled.div`
   color: inherit;
@@ -96,31 +53,19 @@ const CopyRight = styled.div`
     font-size: 16px;
     line-height: 29.16px;
   }
-`;
-
-const FooterLink = styled(Link)`
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-family: "Inter", serif;
-  font-weight: 400;
-  font-size: 16px;
-
-  &:hover {
-    color: #f39c12;
-  }
-`;
-
-const LogoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: center;
+  ${responsive(
+    "xs",
+    `
+    display:none;
+    `
+  )}
 `;
 
 const SocialIcons = styled.div`
   display: flex;
-  gap: ${rem(15)};
+  gap: ${rem(45)};
+  align-items: center;
+  justify-content: center;
 
   a {
     color: white;
@@ -131,72 +76,59 @@ const SocialIcons = styled.div`
       color: #f39c12;
     }
   }
-`;
-
-// Styled container for Language Dropdown
-const LanguageDropdownContainer = styled.div`
-  margin-top: ${rem(20)};
-  width: 100px;
   ${responsive(
     "xs",
     `
-   display:none;
+    display:none;
     `
   )}
 `;
 
 const Footer = () => {
-  // const [selectedOption, setSelectedOption] = useState(languageOptions[0]);
-  // const { t } = useTranslation();
-
-  // Handle language change
-
-
   return (
     <FooterContainer id="footer">
-      <FooterSection>
-        <LogoContainer>
-          <FooterLogo>
-            <BrandIcon to="/">
-              {/* <img src={Logo} alt="This is a logo" /> */}
-            </BrandIcon>
-            <CopyRight>
-              <p>© 2025 Joppa Creative Network Limited</p>
-            </CopyRight>
-          </FooterLogo>
+      <FooterLogo>
+        <CopyRight>
+          <p>© 2025 Joppa Creative Network Limited</p>
+        </CopyRight>
+      </FooterLogo>
 
-          {/* <SocialIcons>
-            <SocialLink
-              href="#"
-              iconSrc={Telegram}
-              altText="Telegram icon"
-              aria-label="Visit our Telegram page"
-            />
+      <SocialIcons>
+        <SocialLink
+          href="#"
+          iconSrc={XIcon}
+          altText="X icon"
+          aria-label="Visit our X page"
+        />
 
-            <SocialLink
-              href="#"
-              iconSrc={Instagram}
-              altText="Instagram icon"
-              aria-label="Visit our Instagram page"
-            />
+        <SocialLink
+          href="#"
+          iconSrc={YTIcon}
+          altText="Youtube icon"
+          aria-label="Visit our youtube page"
+        />
 
-            <SocialLink
-              href="#"
-              iconSrc={TikTok}
-              altText="TikTok icon"
-              aria-label="Visit our TikTok page"
-            />
-            <SocialLink
-              href="#"
-              iconSrc={Facebook}
-              altText="Facebook icon"
-              aria-label="Visit our Facebook page"
-            />
-          </SocialIcons> */}
-        </LogoContainer>
-      </FooterSection>
+        <SocialLink
+          href="https://www.tiktok.com/@bejoppa?_t=ZM-8tDuU3nuVTJ&_r=1"
+          iconSrc={TikTokIcon}
+          altText="Tiktok icon"
+          aria-label="Visit our tiktok page"
+          
+        />
 
-
+        <SocialLink
+          href="https://www.instagram.com/bejoppa?igsh=anpmYWc4Mm5nNThy"
+          iconSrc={InstaIcon}
+          altText="Insta icon"
+          aria-label="visit our Insta page"
+        />
+        <SocialLink
+          href="https://www.linkedin.com/company/bejoppa/"
+          iconSrc={LinkedinIcon}
+          altText="LinkedIn icon"
+          aria-label="Visit our Linkedin page"
+        />
+      </SocialIcons>
     </FooterContainer>
   );
 };

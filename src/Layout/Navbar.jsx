@@ -1,26 +1,38 @@
 import React, { useState } from "react";
-import _ from "lodash";
 import styled from "styled-components";
 import Logo from "../assets/svg/logo.svg";
 
 import VideoIcon from "../assets/svg/Vector.svg";
 
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link } from "react-router-dom"; // Import useLocation
 import { responsive } from "../utils/responsive";
 import { rem } from "../utils/responsiveHelpers";
-
-
+import {
+  BackArrowIconXs,
+  CloseIcon,
+  InstaIconXs,
+  LargeLogo,
+  LinkedinIconXs,
+  MenuXs,
+  TikTokIconXs,
+  XIconXs,
+  YTIconXs,
+} from "../assets/svg";
+import { SocialLink } from "./component/SocialLink";
 
 const NavBar = styled.nav`
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
-  height: 61px;
+  width: ${rem(443)};
+  height: ${rem(57)};
   border-radius: 40px;
-  background-color: #eeece1;
+  background-color: rgba(68, 36, 45, 0.1);
   border: ${({ showBorder }) => (showBorder ? "1px solid white" : "none")};
   color: white;
   display: flex;
   align-items: center;
   /* justify-content: space-evenly; */
+  padding-left: 6px;
+  padding-right: 6px;
   z-index: 1000;
   transition: all 0.3s ease;
 
@@ -30,7 +42,7 @@ const NavBar = styled.nav`
 
     `
   )}
-${responsive(
+  ${responsive(
     "lg",
     `
     justify-content: space-evenly; /* Override to maintain center alignment */
@@ -51,23 +63,18 @@ ${responsive(
   ${responsive(
     "sm",
     `
-    justify-content: space-evenly; /* Ensure content stays centered */
-    width:50%;
-    margin:2% 22%;
-    padding: 0 3.5%;
+    // justify-content: space-evenly; /* Ensure content stays centered */
+    // width:50%;
+    // margin:2% 22%;
+    // padding: 0 3.5%;
   `
   )}
 
   ${responsive(
     "xs",
     `
-    justify-content: space-between;
-    padding: 0 10px;
+    display:none;
     align-items: center;
-    margin-left: 2.5%;
-    border: none;
-    width: 90%;
-    background-image: none;
   `
   )}
 `;
@@ -77,33 +84,6 @@ const NavLogo = styled(Link)`
   font-weight: bold;
 
   cursor: pointer;
-`;
-
-const ListIem = styled.li`
-  display: flex;
-  padding: ${rem(20)};
-
-  ${responsive(
-    "md",
-    `
-
-
-  `
-  )}
-`;
-
-const NavLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  font-size: 16px;
-  font-family: "Inter", sans-serif;
-  font-weight: ${({ active }) =>
-    active ? "600" : "400"}; /* Active link is bold */
-  transition: color 0.3s;
-
-  &:hover {
-    color: #c986fd;
-  }
 `;
 
 const Hamburger = styled.div`
@@ -117,149 +97,87 @@ const Hamburger = styled.div`
     "xs",
     `
     display: flex;
+    align-items:center;
   `
   )}
 `;
 
-// const HamburgerLogo = styled.img`
-//   width: ${rem(24)};
-//   height: ${rem(24)};
-// `;
-
-const NavLinksDesktop = styled.ul`
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  /* gap: ${rem(15)}; */
-  padding-left: 10px;
-  padding-right: 10px;
- 
-
-  ${responsive(
-    "md",
-    `
-    gap: 20px;
-  `
-  )}
-
-  ${responsive(
-    "sm",
-    `
-    gap: 12px;
-  `
-  )}
-
-  ${responsive(
-    "xs",
-    `
-    display: none; /* Hide on mobile */
-  `
-  )}
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 120vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7); // Dark overlay background
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  z-index: 999;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  /* img {
-    height: 30px;
-  } */
-
-  .close-icon {
-    font-size: 20px;
-    cursor: pointer;
-  }
+const HamburgerLogo = styled.img`
+  width: ${rem(24)};
+  height: ${rem(24)};
 `;
 
 const MenuContainer = styled.div`
   position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 300px;
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  z-index: 1000;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  color: white;
+  z-index: 9999;
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  animation: fadeIn 0.3s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
-const NavLinkMob = styled(Link)`
+const ModalWrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  text-decoration: none;
-  color: #000000;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: background 0.3s ease;
-  font-size: 16px;
-  line-height: 19px;
-  font-family: "Inter", sans-serif;
-  font-weight: ${({ active }) =>
-    active ? "600" : "400"}; /* Active link is bold */
-  transition: color 0.3s;
+  height: 70%;
+`;
 
-  &:hover {
-    background: #ad52f7;
-    color: white;
-  }
+const SocialIcons = styled.div`
+  display: flex;
+  gap: ${rem(15)};
+  align-items: center;
+  justify-content: center;
 
-  &.active {
-    background: #d4b2ff;
-    font-weight: 700;
+  a {
     color: white;
+    font-size: ${rem(24)};
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #f39c12;
+    }
   }
 `;
 
-// const NotifyLink = styled(Link)`
-//   display: ${({ hideNotify }) => (hideNotify ? "none" : "flex")};
-
-//   position: fixed;
-//   top: 4.3%;
-//   left: 77%;
-//   display: flex;
-//   align-items: center;
-//   height: ${rem(50)};
-//   width: ${rem(50)};
-//   justify-content: center;
-//   border-radius: ${rem(40)};
-//   cursor: pointer;
-//   background-image: ${({ backgroundColor }) =>
-//     backgroundColor || "linear-gradient(360deg, #b65cff, #bf6bff)"};
-//   border: ${({ showBorder }) =>
-//     showBorder ? "1px solid white" : "none"}; /* Conditional border */
-
-//   ${responsive(
-//     "xs",
-//     `
-//     display:none;
-    
-//   `
-//   )}
-// `;
-// Styled container for Language Dropdown
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
-  /* width: 90%; */
-  /* margin-left: 10%; */
+  /* justify-content: space-around; */
+  justify-content: space-between;
+  margin-left: 10%;
+  width: 80%;
   align-items: center;
+
+  ${responsive(
+    "md",
+    `
+     justify-content: space-between;
+     width: 95%;
+     margin: 2.5%;
+  `
+  )}
+  ${responsive(
+    "xs",
+    `
+     justify-content: space-between;
+     width: 95%;
+     margin: 2.5%;
+     background-color: transparent;
+  `
+  )}
 `;
 
 const RightContainer = styled.button`
@@ -272,37 +190,50 @@ const RightContainer = styled.button`
   justify-content: center;
   gap: ${rem(15)};
   cursor: pointer;
+  ${responsive(
+    "xs",
+    `
+     display:none;
+  `
+  )}
 `;
 const VideoImg = styled.img`
   width: ${rem(27)};
   height: ${rem(27)};
-`
-
-const TabContainer = styled.div`
-
 `;
 
-const TabButton = styled.button`
+const TabContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const TabButton = styled.a`
   flex: 1;
-  padding: 10px 20px;
   font-size: 16px;
+  padding: 12px;
+  width: 100%;
   font-weight: 400;
-  color: ${(props) => (props.isActive ? '#FFFFFF' : '#44242D')}; /* Dark brown text */
-  background-color: ${(props) => (props.isActive ? '#461F0A' : 'transparent')}; /* Dark brown for active */
+  color: ${(props) =>
+    props.isActive ? "#FFFFFF" : "#44242D"}; /* Dark brown text */
+  background-color: ${(props) =>
+    props.isActive ? "#461F0A" : "transparent"}; /* Dark brown for active */
   border: none;
-  border-radius: 20px; /* Rounded edges */
+  border-radius: ${rem(30)}; /* Rounded edges */
   font-family: "Inter", serif;
+  text-decoration: none;
+  text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
     filter: brightness(0.9);
   }
-`;
-
-const LinkImg = styled.img`
-  height: ${rem(17)};
-  width: ${rem(17)};
-  border-radius: 30px;
+  ${responsive(
+    "xs",
+    `
+     display:none;
+  `
+  )}
 `;
 
 const LOGOxs = styled.img`
@@ -322,55 +253,106 @@ const Text = styled.p`
   line-height: ${rem(24)};
   font-weight: 700;
 `;
-const FixedNavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("/"); // Keep track of the active link
-  const location = useLocation(); // Get current location (path)
-  const [activeTab, setActiveTab] = useState('About us');
 
-  const tabs = ['About us', 'For Businesses', 'For Creators'];
+const TextXs = styled.a`
+  color: #ffffff;
+  text-align: center;
+  font-family: "ClashDisplay-Regular", serif;
+  font-size: ${rem(16)};
+  line-height: ${rem(23)};
+  font-weight: 500;
+`;
+
+
+const CloseButton = styled.img`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-self: self-end;
+  padding: 20px;
+  cursor: pointer;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: ${rem(30)};
+`;
+
+const FooterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+const FooterLogo = styled.div``;
+
+const CopyRight = styled.div`
+  color: inherit;
+
+  p {
+    font-family: "ClashDisplay-Regular", serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 29.16px;
+    color: #fff;
+  }
+`;
+const LogoImage = styled.img`
+  width: 192px;
+  height: 150px;
+`;
+
+
+
+const JoinButton = styled.a`
+  background-color: #c1f52f;
+  color: #461f0a;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+
+  width: ${rem(219.48)};
+  height: ${rem(44.63)};
+  font-size: ${rem(16)};
+  font-weight: 600;
+  line-height: ${rem(15.8)};
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  text-decoration: none;
+`;
+
+const GroupNav = styled.div`
+  display: flex;
+  gap: ${rem(81.13)};
+`;
+
+const GoupText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${rem(30)};
+`;
+
+const ArrowIcon = styled.img``;
+
+const FixedNavBar = () => {
+  const [isOpen, setIsOpen] = useState(false); // Modal initially closed
+  const [activeTab, setActiveTab] = useState("About us");
+
+  const tabs = ["About us", "For Businesses", "For Creators"];
 
   const [logoSrc] = useState(Logo);
   const [logoxSrc] = useState(logoSrc);
 
-
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    console.log("clicked");
-  };
-
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-    setIsOpen(false); // Close menu on link click
-  };
-
-  // Function to handle scroll events
-  // Function to handle scroll events
-
-  // Define a function to set background color based on the route
-  const getBackgroundColor = () => {
-    switch (location.pathname) {
-      case "/support":
-        return "linear-gradient(360deg, #161616, #161616)"; // Example gradient for About page
-      case "/merchant":
-        return "linear-gradient(360deg, #161616, #161616)"; // Example gradient for About page
-      case "/policy":
-        return "linear-gradient(360deg, #161616, #161616)"; // Example gradient for About page
-      default:
-        return "linear-gradient(360deg, #b65cff, #bf6bff)"; // Default gradient
-    }
-  };
-
-  // Define a function to decide whether to show a white border
-  const shouldShowBorder = () => {
-    switch (location.pathname) {
-      case "/merchant":
-      case "/support":
-      case "/policy":
-        return true; // Show border on these pages
-      default:
-        return false; // No border on other pages
-    }
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -378,112 +360,98 @@ const FixedNavBar = () => {
       <NavLogo to="/">
         <LOGOxs src={logoxSrc} alt="Logo" />
       </NavLogo>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width:'55%',
-        }}
-      >
-        <NavBar
-          backgroundColor={getBackgroundColor()}
-          showBorder={shouldShowBorder()}
-          // hideNavbar={hideNavbar}
-        >
-          <Hamburger onClick={toggleMenu}>
-            {/* <HamburgerLogo src={hamburgerIcon} alt="Menu" /> */}
-          </Hamburger>
-          <NavLinksDesktop>
+      <GroupNav>
+        <NavBar>
           <TabContainer>
-              {tabs.map((tab) => (
-                <TabButton
-                  key={tab}
-                  isActive={activeTab === tab}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </TabButton>
-              ))}
-            </TabContainer>
-          </NavLinksDesktop>
-
-          {isOpen && (
-            <>
-              <Overlay isOpen={isOpen} onClick={toggleMenu} />
-              <MenuContainer>
-                <LogoWrapper>
-                  {/* <LOGOxs src={LogoXSB} alt="Logo" />
-                <Dismiss src={Close} onClick={toggleMenu} alt="close icon" /> */}
-                </LogoWrapper>
-                <NavLinkMob to="/" onClick={() => handleLinkClick("/")}>
-                  Home
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="ArrowForward icon"
-                /> */}
-                </NavLinkMob>
-                <NavLinkMob
-                  to="/about"
-                  onClick={() => handleLinkClick("/about")}
-                >
-                  About
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="ArrowForward icon"
-                /> */}
-                </NavLinkMob>
-                <NavLinkMob
-                  to="/support"
-                  onClick={() => handleLinkClick("/support")}
-                >
-                  Support
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="ArrowForward icon"
-                /> */}
-                </NavLinkMob>
-                <NavLinkMob
-                  to="/merchant"
-                  onClick={() => handleLinkClick("/merchant")}
-                >
-                  Merchant
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="close icon"
-                /> */}
-                </NavLinkMob>
-                <NavLinkMob
-                  to="/safety"
-                  onClick={() => handleLinkClick("/safety")}
-                >
-                  Safety
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="close icon"
-                /> */}
-                </NavLinkMob>
-                <NavLinkMob to="/blog" onClick={() => handleLinkClick("/blog")}>
-                  Updates
-                  {/* <LinkImg
-                  src={ArrowForward}
-                  onClick={toggleMenu}
-                  alt="close icon"
-                /> */}
-                </NavLinkMob>
-              </MenuContainer>
-            </>
-          )}
+            {tabs.map((tab) => (
+              <TabButton
+                key={tab}
+                isActive={activeTab === tab}
+                onClick={() => setActiveTab(tab)}
+                href="#"
+              >
+                {tab}
+              </TabButton>
+            ))}
+          </TabContainer>
         </NavBar>
+        {isOpen && (
+          <MenuContainer isOpen={isOpen}>
+            <ModalWrapper>
+              <CloseButton src={CloseIcon} alt="Close" onClick={toggleMenu} />
+
+              <div>
+                <LogoContainer>
+                  <LogoImage src={LargeLogo} alt="Logo" />
+                  <GoupText>
+                    <TextXs>Contact us</TextXs>
+                    <TextXs>See how it works</TextXs>
+                  </GoupText>
+
+                  <JoinButton
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfRy-4gSx1XbTb61uWZB_aHZcHGTiXMiMeOxrAnu9F6eDLeLg/viewform?usp=preview"
+                    target="_blank"
+                  >
+                    Join Joppa
+                    <ArrowIcon src={BackArrowIconXs} alt="arrow out" />
+                  </JoinButton>
+                </LogoContainer>
+              </div>
+              <FooterContainer id="footer">
+                <FooterLogo>
+                  <CopyRight>
+                    <p>© 2025 Joppa Creative Network Limited</p>
+                  </CopyRight>
+                </FooterLogo>
+
+                <SocialIcons>
+                  <SocialLink
+                    href="#"
+                    iconSrc={XIconXs}
+                    altText="X icon"
+                    aria-label="Visit our X page"
+                  />
+
+                  <SocialLink
+                    href="#"
+                    iconSrc={YTIconXs}
+                    altText="Youtube icon"
+                    aria-label="Visit our youtube page"
+                  />
+
+                  <SocialLink
+                    href="https://www.tiktok.com/@bejoppa?_t=ZM-8tDuU3nuVTJ&_r=1"
+                    iconSrc={TikTokIconXs}
+                    altText="Tiktok icon"
+                    aria-label="Visit our tiktok page"
+                  />
+
+                  <SocialLink
+                    href="https://www.instagram.com/bejoppa?igsh=anpmYWc4Mm5nNThy"
+                    iconSrc={InstaIconXs}
+                    altText="Insta icon"
+                    aria-label="visit our Insta page"
+                  />
+                  <SocialLink
+                    href="https://www.linkedin.com/company/bejoppa/"
+                    iconSrc={LinkedinIconXs}
+                    altText="LinkedIn icon"
+                    aria-label="Visit our Linkedin page"
+                  />
+                </SocialIcons>
+              </FooterContainer>
+            </ModalWrapper>
+          </MenuContainer>
+        )}
         <RightContainer>
           <Text>See how it works</Text>
           <VideoImg src={VideoIcon} alt="video icon" />
         </RightContainer>
-      </div>
+      </GroupNav>
+
+      <Hamburger onClick={toggleMenu}>
+        <HamburgerLogo src={MenuXs} alt="Menu" />
+      </Hamburger>
     </Container>
   );
 };

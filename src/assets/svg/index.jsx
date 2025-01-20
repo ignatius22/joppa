@@ -1,9 +1,25 @@
 export { default as BackArrowIcon } from './arrow_outward.svg';
 export { default as BookIcon } from './book.svg';
-export { default as PizzaIcon } from './Pizza.svg';
+export { default as PizzaIcon } from './pizza.svg';
 export { default as PanIcon } from './pan.svg';
 export { default as MailIcon } from './mail.svg';
 export { default as BinoIcon } from './bino.svg';
 export { default as StatIcon } from './stat.svg';
 export { default as GlobeIcon } from './globe.svg';
-
+export { default as XIcon } from './x.svg';
+export { default as TikTokIcon } from './tiktok.svg';
+export { default as InstaIcon } from './insta.svg';
+export { default as LinkedinIcon } from './linkedin.svg';
+export { default as YTIcon } from './YT.svg';
+export { default as BinoIconXs } from './binoXs.svg';
+export { default as StatIconXs } from './statXs.svg';
+export { default as GlobeIconXs } from './globeXs.svg';
+export { default as MenuXs } from './menu.svg';
+export { default as CloseIcon } from './close.svg';
+export { default as LargeLogo } from './large_logo.svg';
+export { default as XIconXs } from './xXs.svg';
+export { default as TikTokIconXs } from './tiktokXs.svg';
+export { default as InstaIconXs } from './instaXs.svg';
+export { default as LinkedinIconXs } from './linkedinXs.svg';
+export { default as YTIconXs } from './YTxs.svg';
+export { default as BackArrowIconXs } from './arrow_outwardXs.svg';
