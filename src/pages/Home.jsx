@@ -592,28 +592,12 @@ const MailContainer = styled.a`
   ${responsive(
     "xs",
     `
-    display: flex;
-    width: ${rem(70)};
-    height: ${rem(70)};
-    right: 3%;
-    align-items: center;
-    justify-content: center;
+    display: none;
+
   
   `
   )}
-    ${responsive(
-    "custom375",
-    `
-    display: flex;
-    width: ${rem(70)};
-    height: ${rem(70)};
-    bottom: 13%;
-    right: 3%;
-    align-items: center;
-    justify-content: center;
-  
-  `
-  )}
+
 `;
 
 const MailImage = styled.img`

@@ -261,15 +261,16 @@ const TextXs = styled.a`
   font-size: ${rem(16)};
   line-height: ${rem(23)};
   font-weight: 500;
+  text-decoration: none;
 `;
-
 
 const CloseButton = styled.img`
   width: 24px;
   height: 24px;
   display: flex;
   align-self: self-end;
-  padding: 20px;
+  padding-top: 88px;
+  padding-right: ${rem(16)};
   cursor: pointer;
 `;
 
@@ -286,6 +287,7 @@ const FooterContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-top:${rem(111)};
 `;
 const FooterLogo = styled.div``;
 
@@ -303,9 +305,9 @@ const CopyRight = styled.div`
 const LogoImage = styled.img`
   width: 192px;
   height: 150px;
+  padding-left: ${rem(99)};
+  padding-right: ${rem(99)};
 `;
-
-
 
 const JoinButton = styled.a`
   background-color: #c1f52f;
@@ -384,7 +386,12 @@ const FixedNavBar = () => {
                 <LogoContainer>
                   <LogoImage src={LargeLogo} alt="Logo" />
                   <GoupText>
-                    <TextXs>Contact us</TextXs>
+                    <TextXs
+                      href="mailto:Joppacreative@gmail.com"
+                      target="_top"
+                    >
+                      Contact us
+                    </TextXs>
                     <TextXs>See how it works</TextXs>
                   </GoupText>
 
