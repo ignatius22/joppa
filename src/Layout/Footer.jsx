@@ -95,14 +95,14 @@ const Footer = () => {
 
       <SocialIcons>
         <SocialLink
-          href="#"
+          href="https://x.com/usejoppa?s=21"
           iconSrc={XIcon}
           altText="X icon"
           aria-label="Visit our X page"
         />
 
         <SocialLink
-          href="#"
+          href="https://youtube.com/@joppacreative?si=-KNGpA5kq8NsHx_I"
           iconSrc={YTIcon}
           altText="Youtube icon"
           aria-label="Visit our youtube page"

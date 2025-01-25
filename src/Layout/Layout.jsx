@@ -8,7 +8,7 @@ function Layout() {
     <div style={{ marginTop: 40 }}>
       <FixedNavBar />
       <main style={{ minHeight: "100vh" }}>
-        <Outlet />
+        <Outlet food="food"/>
       </main>
       <Footer />
     </div>

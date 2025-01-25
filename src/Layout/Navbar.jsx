@@ -54,7 +54,8 @@ const NavBar = styled.nav`
     "md",
     `
  
-   
+    width: 80%;
+    height: ${rem(48)};
 
 
   `
@@ -190,6 +191,15 @@ const RightContainer = styled.button`
   justify-content: center;
   gap: ${rem(15)};
   cursor: pointer;
+  border: none;
+
+  ${responsive(
+    "md",
+    `
+   gap: ${rem(8)};
+   height: ${rem(40)};
+  `
+  )}
   ${responsive(
     "xs",
     `
@@ -200,6 +210,13 @@ const RightContainer = styled.button`
 const VideoImg = styled.img`
   width: ${rem(27)};
   height: ${rem(27)};
+  ${responsive(
+    "md",
+    `
+    width: ${rem(20)};
+    height: ${rem(20)};
+  `
+  )}
 `;
 
 const TabContainer = styled.div`
@@ -229,6 +246,13 @@ const TabButton = styled.a`
     filter: brightness(0.9);
   }
   ${responsive(
+    "md",
+    `
+      font-size: 13px;
+      padding: 12px;
+  `
+  )}
+  ${responsive(
     "xs",
     `
      display:none;
@@ -253,6 +277,23 @@ const Text = styled.p`
   line-height: ${rem(24)};
   font-weight: 700;
 `;
+const TextA = styled.a`
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter", serif;
+  font-size: ${rem(16)};
+  line-height: ${rem(24)};
+  font-weight: 700;
+  text-decoration: none;
+  ${responsive(
+    "md",
+    `
+     font-size: ${rem(13)};
+     line-height: ${rem(23)};
+  `
+  )}
+
+`;
 
 const TextXs = styled.a`
   color: #ffffff;
@@ -262,6 +303,8 @@ const TextXs = styled.a`
   line-height: ${rem(23)};
   font-weight: 500;
   text-decoration: none;
+  
+  
 `;
 
 const CloseButton = styled.img`
@@ -287,7 +330,7 @@ const FooterContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding-top:${rem(111)};
+  padding-top: ${rem(111)};
 `;
 const FooterLogo = styled.div``;
 
@@ -370,7 +413,7 @@ const FixedNavBar = () => {
                 key={tab}
                 isActive={activeTab === tab}
                 onClick={() => setActiveTab(tab)}
-                href="#"
+                href={`#${tab.replace(/\s+/g, '').toLowerCase()}`} // Convert tab name to valid ID
               >
                 {tab}
               </TabButton>
@@ -386,13 +429,15 @@ const FixedNavBar = () => {
                 <LogoContainer>
                   <LogoImage src={LargeLogo} alt="Logo" />
                   <GoupText>
-                    <TextXs
-                      href="mailto:Joppacreative@gmail.com"
-                      target="_top"
-                    >
+                    <TextXs href="mailto:Joppacreative@gmail.com" target="_top">
                       Contact us
                     </TextXs>
-                    <TextXs>See how it works</TextXs>
+                    <TextXs
+                      href="https://youtube.com/@joppacreative?si=-KNGpA5kq8NsHx_I"
+                      target="_blank"
+                    >
+                      See how it works
+                    </TextXs>
                   </GoupText>
 
                   <JoinButton
@@ -413,14 +458,14 @@ const FixedNavBar = () => {
 
                 <SocialIcons>
                   <SocialLink
-                    href="#"
+                    href="https://x.com/usejoppa?s=21"
                     iconSrc={XIconXs}
                     altText="X icon"
                     aria-label="Visit our X page"
                   />
 
                   <SocialLink
-                    href="#"
+                    href="https://youtube.com/@joppacreative?si=-KNGpA5kq8NsHx_I"
                     iconSrc={YTIconXs}
                     altText="Youtube icon"
                     aria-label="Visit our youtube page"
@@ -451,7 +496,7 @@ const FixedNavBar = () => {
           </MenuContainer>
         )}
         <RightContainer>
-          <Text>See how it works</Text>
+          <TextA href="https://youtube.com/@joppacreative?si=-KNGpA5kq8NsHx_" target="_blank">See how it works</TextA>
           <VideoImg src={VideoIcon} alt="video icon" />
         </RightContainer>
       </GroupNav>

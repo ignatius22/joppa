@@ -15,7 +15,7 @@ import {
   StatIconXs,
 } from "../assets/svg";
 import { responsive } from "../utils/responsive";
-import { Illustration, Illustration2 } from "../assets/images";
+import { Illustration, Illustration2, Palm } from "../assets/images";
 
 const Container = styled.div`
   display: flex;
@@ -136,10 +136,17 @@ const SubText = styled.span`
   )}
 `;
 
-const Emoji = styled.span`
-  font-size: 128px;
-  font-weight: 600;
-  text-align: center;
+const Emoji = styled.img`
+  display: flex;
+  flex-direction: column;
+  width: ${rem(128)};
+  align-items: center;
+  ${responsive(
+    "md",
+    `
+     width: ${rem(108)};
+    `
+  )}
   ${responsive(
     "xs",
     `
@@ -281,8 +288,6 @@ const ToggleButton = styled.div`
 const FeatureRoot = styled.div`
   background-color: ${(props) => props.color};
   border-radius: ${rem(40.5)};
-  /* margin-left: 64px;
-  margin-right: 64px; */
   width: 95%;
   margin-top: 112px;
   height: ${rem(560)};
@@ -299,6 +304,7 @@ const FeatureRoot = styled.div`
     `
     display: block;
     width:90%;
+    height: ${rem(460)};
 
 
   `
@@ -326,6 +332,7 @@ const FeatureWrapper = styled.div`
     "md",
     `
     gap: ${rem(30)};
+    margin-bottom: 30%;
   `
   )}
 
@@ -377,7 +384,7 @@ const Text = styled.span`
     "md",
     `
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     padding-right: 20px;
   
   `
@@ -405,7 +412,7 @@ const Title = styled.span`
     "md",
     `
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 30px;
   
@@ -428,6 +435,14 @@ const IconWithTextContainer = styled.div`
   flex-direction: column;
   gap: ${rem(26)};
   align-items: flex-start;
+
+  ${responsive(
+    "md",
+    `
+    gap: ${rem(10)};
+  
+  `
+  )}
 `;
 
 const RightWrapper = styled.div`
@@ -463,7 +478,7 @@ const LeftWrapper = styled.div`
   ${responsive(
     "md",
     `
-    width: 50%;
+    height: ${rem(500)};
     border-radius: 40px;
     opacity: 0px;
 
@@ -519,7 +534,8 @@ const IconWrapper = styled.div`
   ${responsive(
     "md",
     `
-    gap: ${rem(20)};
+    gap: ${rem(10)};
+    padding-right:20px;
 `
   )}
 `;
@@ -531,6 +547,13 @@ const IconMobile = styled.img`
   display: none;
 
   ${responsive(
+    "md",
+    `
+    gap: ${rem(30)};
+    height:20px;
+`
+  )}
+  ${responsive(
     "xs",
     `
     display: block; // Show this for mobile
@@ -539,7 +562,11 @@ const IconMobile = styled.img`
   )}
 `;
 const Icon = styled.img`
-  /* padding-top: ${rem(15)}; */
+  ${responsive(
+    "md",
+    `
+  `
+  )}
   ${responsive(
     "xs",
     `
@@ -551,6 +578,11 @@ const Icon = styled.img`
 const IconTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  ${responsive(
+    "md",
+    `
+  `
+  )}
 `;
 const IconTextTitle = styled.span`
   font-family: "ClashDisplay-SemiBold", serif;
@@ -559,6 +591,13 @@ const IconTextTitle = styled.span`
   line-height: 27px;
   text-align: left;
   color: ${(props) => props.color};
+
+  ${responsive(
+    "md",
+    `
+     font-size: 13px;
+  `
+  )}
   ${responsive(
     "xs",
     `
@@ -585,8 +624,8 @@ const MailContainer = styled.a`
   ${responsive(
     "md",
     `
-    display:none;
-  
+    width: ${rem(70)};
+    height: ${rem(70)};
   `
   )}
   ${responsive(
@@ -597,10 +636,17 @@ const MailContainer = styled.a`
   
   `
   )}
-
 `;
 
 const MailImage = styled.img`
+  ${responsive(
+    "md",
+    `
+    width: ${rem(30)};
+    height: ${rem(30)};
+  
+  `
+  )}
   ${responsive(
     "xs",
     `
@@ -625,7 +671,7 @@ const Label = styled.div`
   ${responsive(
     "xs",
     `
-    display:flex;
+    display:none;
     background-color: #c1f52f;
     width: ${rem(229)};
     height: ${rem(29.78)};
@@ -633,6 +679,8 @@ const Label = styled.div`
     justify-content:center;
     align-items: center;
     margin-top: ${rem(29)};
+    margin-left: ${rem(23)};
+    margin-right: ${rem(123)};
   
   `
   )}
@@ -709,14 +757,15 @@ const CombineWrapper = styled.div`
 `;
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState("Creators");
+  const tabs = ["Businesses", "For Creators"];
+  const [activeTab, setActiveTab] = useState(tabs[0]);
   return (
     <Container className="center-gradient">
       <Content>
         <CombineWrapper>
           <WrapperUp>
             <MainText>Hey creator</MainText>
-            <Emoji>👋🏼</Emoji>
+            <Emoji src={Palm} alt="hand icon" />
           </WrapperUp>
           <WrapperDown>
             <SubText>Join the team and work with your favourite brands</SubText>
@@ -802,127 +851,131 @@ const Home = () => {
           </ToggleButton>
         </ToggleContainer>
       </Content>
-      {activeTab === "Creators" ? (
-        <FeatureRoot color="#D2ACE7" id="creator">
-          <FeatureWrapper>
-            <LeftWrapper color="#461f0a">
-              <Image src={Illustration} alt="illustrations" />
-            </LeftWrapper>
-            <RightWrapper>
-              <TextContainer>
-                <Title color="#461F0A">Work with brands you love</Title>
-                <Text color="#461F0A">
-                  Joppa makes it easy for you to find businesses that are in
-                  need of your creative genius to amplify their brands voice
-                </Text>
-              </TextContainer>
-              <IconWithTextContainer>
-                <IconWrapper>
-                  <IconMain src={BookIcon} alt="book icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#461F0A">
-                      Direct access to job opportunities
-                    </IconTextTitle>
-                    <Text color="#461F0A">
-                      Browse and bid for jobs directly posted by businesses,
-                      eliminating the struggle of finding clients.
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-                <IconWrapper>
-                  <IconMain src={PizzaIcon} alt="pizza icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#461F0A">
-                      Creator support
-                    </IconTextTitle>
-                    <Text color="#461F0A">
-                      Access to best practice, resource, and insight to improve
-                      your content quality and professional appeal.
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-                <IconWrapper>
-                  <IconMain src={PanIcon} alt="pan icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#461F0A">
-                      Content monetization
-                    </IconTextTitle>
-                    <Text color="#461F0A">
-                      Monetize your skill, and earn consistently without the
-                      need foe any upfront subscription.
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-              </IconWithTextContainer>
-            </RightWrapper>
-          </FeatureWrapper>
-        </FeatureRoot>
+      {activeTab === "For Creators" ? (
+        <div id="forcreators">
+          <FeatureRoot color="#D2ACE7">
+            <FeatureWrapper>
+              <LeftWrapper color="#461f0a">
+                <Image src={Illustration} alt="illustrations" />
+              </LeftWrapper>
+              <RightWrapper>
+                <TextContainer>
+                  <Title color="#461F0A">Work with brands you love</Title>
+                  <Text color="#461F0A">
+                    Joppa makes it easy for you to find businesses that are in
+                    need of your creative genius to amplify their brands voice
+                  </Text>
+                </TextContainer>
+                <IconWithTextContainer>
+                  <IconWrapper>
+                    <IconMain src={BookIcon} alt="book icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#461F0A">
+                        Direct access to job opportunities
+                      </IconTextTitle>
+                      <Text color="#461F0A">
+                        Browse and bid for jobs directly posted by businesses,
+                        eliminating the struggle of finding clients.
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                  <IconWrapper>
+                    <IconMain src={PizzaIcon} alt="pizza icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#461F0A">
+                        Creator support
+                      </IconTextTitle>
+                      <Text color="#461F0A">
+                        Access to best practice, resource, and insight to
+                        improve your content quality and professional appeal.
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                  <IconWrapper>
+                    <IconMain src={PanIcon} alt="pan icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#461F0A">
+                        Content monetization
+                      </IconTextTitle>
+                      <Text color="#461F0A">
+                        Monetize your skill, and earn consistently without the
+                        need foe any upfront subscription.
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                </IconWithTextContainer>
+              </RightWrapper>
+            </FeatureWrapper>
+          </FeatureRoot>
+        </div>
       ) : (
-        <FeatureRoot color="#461F0A" id="#businesses">
-          <FeatureWrapper>
-            <LeftWrapper color="#D2ACE7">
-              <Image src={Illustration2} alt="illustrations" />
-            </LeftWrapper>
-            <RightWrapper>
-              <TextContainer>
-                <Title color="#ffffff">
-                  Work with creators to amplify your brands voice
-                </Title>
-                <Text color="#ffffff">
-                  Effortlessly connect with skilled creators who understand your
-                  vision and help you tell your brand story and impact!
-                </Text>
-              </TextContainer>
-              <IconWithTextContainer>
-                <IconWrapper>
-                  <Icon src={BinoIcon} alt="bino icon" />
-                  <IconMobile src={BinoIconXs} alt="book icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#ffffff">
-                      Find creators to amplify your brands voice
-                    </IconTextTitle>
-                    <Text color="#ffffff">
-                      Access a curated pool of creators that align with your
-                      brands vision, style and goal, making collaboration
-                      effortless.
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-                <IconWrapper>
-                  <Icon src={StatIcon} alt="stat icon" />
-                  <IconMobile src={StatIconXs} alt="book icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#ffffff">
-                      Streamlined campaign management{" "}
-                    </IconTextTitle>
-                    <Text color="#ffffff">
-                      Post jobs, receve bids, and select the perfect creator
-                      with just a few clicks-no more hassle to finding the right
-                      fit
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-                <IconWrapper>
-                  <Icon src={GlobeIcon} alt="globe icon" />
-                  <IconMobile src={GlobeIconXs} alt="book icon" />
-                  <IconTextWrapper>
-                    <IconTextTitle color="#ffffff">
-                      Tailored creator match making
-                    </IconTextTitle>
-                    <Text color="#ffffff">
-                      Access a curated pool of creators that align with your
-                      brand’s vision, style, and goals, making collaboration
-                      effortless.
-                    </Text>
-                  </IconTextWrapper>
-                </IconWrapper>
-                <Label>
-                  <LabelText>See whats in it for businesses</LabelText>
-                </Label>
-              </IconWithTextContainer>
-            </RightWrapper>
-          </FeatureWrapper>
-        </FeatureRoot>
+        <div id="forbusinesses">
+          <FeatureRoot color="#461F0A">
+            <FeatureWrapper>
+              <LeftWrapper color="#D2ACE7">
+                <Image src={Illustration2} alt="illustrations" />
+              </LeftWrapper>
+              <RightWrapper>
+                <TextContainer>
+                  <Title color="#ffffff">
+                    Work with creators to amplify your brands voice
+                  </Title>
+                  <Text color="#ffffff">
+                    Effortlessly connect with skilled creators who understand
+                    your vision and help you tell your brand story and impact!
+                  </Text>
+                </TextContainer>
+                <IconWithTextContainer>
+                  <IconWrapper>
+                    <Icon src={BinoIcon} alt="bino icon" />
+                    <IconMobile src={BinoIconXs} alt="book icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#ffffff">
+                        Find creators to amplify your brands voice
+                      </IconTextTitle>
+                      <Text color="#ffffff">
+                        Access a curated pool of creators that align with your
+                        brands vision, style and goal, making collaboration
+                        effortless.
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                  <IconWrapper>
+                    <Icon src={StatIcon} alt="stat icon" />
+                    <IconMobile src={StatIconXs} alt="book icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#ffffff">
+                        Streamlined campaign management{" "}
+                      </IconTextTitle>
+                      <Text color="#ffffff">
+                        Post jobs, receve bids, and select the perfect creator
+                        with just a few clicks-no more hassle to finding the
+                        right fit
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                  <IconWrapper>
+                    <Icon src={GlobeIcon} alt="globe icon" />
+                    <IconMobile src={GlobeIconXs} alt="book icon" />
+                    <IconTextWrapper>
+                      <IconTextTitle color="#ffffff">
+                        Tailored creator match making
+                      </IconTextTitle>
+                      <Text color="#ffffff">
+                        Access a curated pool of creators that align with your
+                        brand’s vision, style, and goals, making collaboration
+                        effortless.
+                      </Text>
+                    </IconTextWrapper>
+                  </IconWrapper>
+                  <Label>
+                    <LabelText>See whats in it for businesses</LabelText>
+                  </Label>
+                </IconWithTextContainer>
+              </RightWrapper>
+            </FeatureWrapper>
+          </FeatureRoot>
+        </div>
       )}
       <MailContainer href="mailto:Joppacreative@gmail.com" target="_self">
         <MailImage src={MailIcon} alt="Mail icon" />
@@ -932,3 +985,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// "forbusinesses"
